@@ -49,6 +49,7 @@ interface UserTableProps {
   users: User[]
   locale: string
   currentUserId?: string
+  onRefresh?: () => void
 }
 
 const roleColors = {
@@ -62,7 +63,7 @@ const roleLabels = {
   en: { ADMIN: 'Admin', MANAGER: 'Manager', USER: 'User' },
 }
 
-export function UserTable({ users, locale, currentUserId }: UserTableProps) {
+export function UserTable({ users, locale, currentUserId, onRefresh }: UserTableProps) {
   const t = useTranslations('common')
   const isVi = locale === 'vi'
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
@@ -87,6 +88,7 @@ export function UserTable({ users, locale, currentUserId }: UserTableProps) {
       await deleteUser(selectedUser.id)
       toast.success(isVi ? 'Đã xóa người dùng' : 'User deleted successfully')
       setDeleteDialogOpen(false)
+      onRefresh?.()
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Failed to delete user')
     } finally {
@@ -184,7 +186,10 @@ export function UserTable({ users, locale, currentUserId }: UserTableProps) {
       {/* Edit Dialog */}
       <UserFormDialog
         open={editDialogOpen}
-        onOpenChange={setEditDialogOpen}
+        onOpenChange={(open) => {
+          setEditDialogOpen(open)
+          if (!open) onRefresh?.()
+        }}
         user={selectedUser}
         locale={locale}
       />

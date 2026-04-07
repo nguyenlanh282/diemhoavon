@@ -144,7 +144,7 @@ export default function UsersPage() {
           <CardTitle>{isVi ? 'Danh sách người dùng' : 'User List'}</CardTitle>
         </CardHeader>
         <CardContent>
-          <UserTable users={users} locale={locale} currentUserId={session?.user?.id} />
+          <UserTable users={users} locale={locale} currentUserId={session?.user?.id} onRefresh={loadData} />
         </CardContent>
       </Card>
 
