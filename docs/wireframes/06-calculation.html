@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Tinh Toan | Diem Hoa Von</title>
+    <style>
+        :root {
+            --primary-500: #10B981;
+            --primary-600: #059669;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --bg-page: #F9FAFB;
+            --sidebar-bg: #FFFFFF;
+            --sidebar-bg-hover: #F3F4F6;
+            --sidebar-bg-active: #D1FAE5;
+            --sidebar-text: #374151;
+            --sidebar-text-active: #059669;
+            --text-primary: #111827;
+            --text-secondary: #6B7280;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-page);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 264px;
+            background: var(--sidebar-bg);
+            min-height: 100vh;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar-logo {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 700;
+            padding: 0 12px 24px;
+            border-bottom: 1px solid var(--gray-200);
+            margin-bottom: 24px;
+        }
+
+        .sidebar-nav { flex: 1; }
+        .nav-section { margin-bottom: 24px; }
+
+        .nav-section-title {
+            color: var(--sidebar-text);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+            margin-bottom: 4px;
+        }
+
+        .nav-item:hover { background: var(--sidebar-bg-hover); color: var(--text-primary); }
+        .nav-item.active { background: var(--sidebar-bg-active); color: var(--sidebar-text-active); }
+
+        .main-content {
+            flex: 1;
+            margin-left: 264px;
+            padding: 24px 32px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .header-title h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .header-title p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .header-actions { display: flex; gap: 12px; }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary { background: var(--primary-500); color: white; }
+        .btn-primary:hover { background: var(--primary-600); }
+        .btn-secondary { background: white; color: var(--text-primary); border: 1px solid var(--gray-300); }
+        .btn-secondary:hover { background: var(--gray-50); }
+        .btn-success { background: var(--success); color: white; }
+        .btn-success:hover { background: #059669; }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-list {
+            list-style: none;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .summary-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .summary-total {
+            background: var(--gray-50);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .summary-total .summary-item {
+            border-bottom: none;
+            padding: 0;
+        }
+
+        .summary-total .summary-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .summary-total .summary-value {
+            font-size: 18px;
+            color: var(--primary-500);
+        }
+
+        .result-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+            color: white;
+        }
+
+        .result-card .card-title {
+            color: white;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .result-item {
+            text-align: center;
+            padding: 24px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+        }
+
+        .result-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .result-unit {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .chart-section {
+            grid-column: 1 / -1;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-tabs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chart-tab {
+            padding: 8px 16px;
+            border: 1px solid var(--gray-200);
+            border-radius: 6px;
+            background: white;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chart-tab.active {
+            background: var(--primary-500);
+            color: white;
+            border-color: var(--primary-500);
+        }
+
+        .chart-placeholder {
+            height: 350px;
+            background: var(--gray-50);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .legend-color.revenue { background: var(--success); }
+        .legend-color.total-cost { background: var(--error); }
+        .legend-color.fixed { background: var(--warning); }
+        .legend-color.bep { background: var(--primary-500); }
+
+        .formula-section {
+            grid-column: 1 / -1;
+        }
+
+        .formula-box {
+            background: var(--gray-50);
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .formula-title {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-family: inherit;
+        }
+
+        .formula-main {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .formula-breakdown {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .formula-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .formula-var {
+            color: var(--primary-500);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-logo">Diem Hoa Von</div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">Menu chinh</div>
+                <a href="#" class="nav-item"><span>📊</span> Dashboard</a>
+                <a href="#" class="nav-item"><span>📁</span> Dinh phi</a>
+                <a href="#" class="nav-item"><span>📈</span> Bien phi</a>
+                <a href="#" class="nav-item"><span>📦</span> San pham</a>
+                <a href="#" class="nav-item active"><span>🧮</span> Tinh toan</a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Bao cao</div>
+                <a href="#" class="nav-item"><span>📋</span> Lich su</a>
+                <a href="#" class="nav-item"><span>📧</span> Gui email</a>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <div class="header-title">
+                <h1>Tinh toan Diem Hoa Von</h1>
+                <p>Phan tich diem hoa von da san pham</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary">
+                    <span>📧</span> Gui bao cao
+                </button>
+                <button class="btn btn-secondary">
+                    <span>📥</span> Xuat PDF
+                </button>
+                <button class="btn btn-success">
+                    <span>💾</span> Luu ket qua
+                </button>
+            </div>
+        </header>
+
+        <div class="content-grid">
+            <!-- Fixed Costs Summary -->
+            <div class="card">
+                <h3 class="card-title">📁 Tong hop Dinh phi</h3>
+                <ul class="summary-list">
+                    <li class="summary-item">
+                        <span class="summary-label">Tien thue mat bang</span>
+                        <span class="summary-value">35,000,000đ</span>
+                    </li>
+                    <li class="summary-item">
+                        <span class="summary-label">Tien dien, nuoc, internet</span>
+                        <span class="summary-value">12,000,000đ</span>
+                    </li>
+                    <li class="summary-item">
+                        <span class="summary-label">Luong nhan vien co dinh</span>
+                        <span class="summary-value">65,000,000đ</span>
+                    </li>
+                    <li class="summary-item">
+                        <span class="summary-label">Chi phi khac</span>
+                        <span class="summary-value">13,000,000đ</span>
+                    </li>
+                </ul>
+                <div class="summary-total">
+                    <div class="summary-item">
+                        <span class="summary-label">Tong dinh phi</span>
+                        <span class="summary-value">125,000,000đ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Variable Costs Summary -->
+            <div class="card">
+                <h3 class="card-title">📈 Tong hop Bien phi</h3>
+                <ul class="summary-list">
+                    <li class="summary-item">
+                        <span class="summary-label">Gia von hang ban (20%)</span>
+                        <span class="summary-value">30,000đ/don</span>
+                    </li>
+                    <li class="summary-item">
+                        <span class="summary-label">Thue VAT (10%)</span>
+                        <span class="summary-value">15,000đ/don</span>
+                    </li>
+                    <li class="summary-item">
+                        <span class="summary-label">Hoa hong + Phi thanh toan</span>
+                        <span class="summary-value">10,500đ/don</span>
+                    </li>
+                    <li class="summary-item">
+                        <span class="summary-label">Dong goi + Van chuyen</span>
+                        <span class="summary-value">20,000đ/don</span>
+                    </li>
+                </ul>
+                <div class="summary-total">
+                    <div class="summary-item">
+                        <span class="summary-label">Tong bien phi/don</span>
+                        <span class="summary-value">45,000đ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Break-Even Result -->
+            <div class="card result-card">
+                <h3 class="card-title">🎯 Ket qua Diem Hoa Von</h3>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">So don can ban</div>
+                        <div class="result-value">2,500</div>
+                        <div class="result-unit">don hang</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Doanh thu hoa von</div>
+                        <div class="result-value">375,000,000</div>
+                        <div class="result-unit">VND</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Contribution Margin</div>
+                        <div class="result-value">105,000</div>
+                        <div class="result-unit">VND/don</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="card chart-section">
+                <div class="chart-header">
+                    <h3 class="card-title">📊 Bieu do phan tich</h3>
+                    <div class="chart-tabs">
+                        <button class="chart-tab active">Diem hoa von</button>
+                        <button class="chart-tab">Co cau chi phi</button>
+                        <button class="chart-tab">San pham</button>
+                    </div>
+                </div>
+                <div class="chart-placeholder">
+                    <div style="font-size: 48px; margin-bottom: 16px;">📈</div>
+                    <div>[Bieu do duong - Doanh thu vs Tong chi phi]</div>
+                    <div style="font-size: 12px; margin-top: 8px;">Giao diem tai 2,500 don = Diem hoa von</div>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color revenue"></div>
+                        <span>Doanh thu</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color total-cost"></div>
+                        <span>Tong chi phi</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color fixed"></div>
+                        <span>Dinh phi</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color bep"></div>
+                        <span>Diem hoa von</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formula Section -->
+            <div class="card formula-section">
+                <h3 class="card-title">📐 Cong thuc tinh toan</h3>
+                <div class="formula-box">
+                    <div class="formula-title">DIEM HOA VON (SO DON)</div>
+                    <div class="formula-main">
+                        BEP = Tong Dinh Phi / Contribution Margin
+                    </div>
+                    <div class="formula-breakdown">
+                        <div class="formula-item">
+                            <span class="formula-var">BEP</span> = 125,000,000 / 105,000
+                        </div>
+                        <div class="formula-item">
+                            <span class="formula-var">BEP</span> = 2,500 don
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

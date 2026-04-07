@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Dashboard | Diem Hoa Von</title>
+    <style>
+        :root {
+            /* Primary - Green */
+            --primary-500: #10B981;
+            --primary-600: #059669;
+            --primary-700: #047857;
+
+            /* Accent Colors */
+            --coral: #F87171;
+            --coral-light: #FEE2E2;
+            --teal: #14B8A6;
+            --teal-light: #CCFBF1;
+            --orange: #F59E0B;
+            --orange-light: #FEF3C7;
+
+            /* Neutrals */
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+
+            /* Page Background */
+            --bg-page: #F9FAFB;
+
+            /* Sidebar - Light */
+            --sidebar-bg: #FFFFFF;
+            --sidebar-bg-hover: #F3F4F6;
+            --sidebar-bg-active: #D1FAE5;
+            --sidebar-text: #374151;
+            --sidebar-text-active: #059669;
+
+            /* Text */
+            --text-primary: #111827;
+            --text-secondary: #6B7280;
+
+            /* Status */
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-page);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 264px;
+            background: var(--sidebar-bg);
+            min-height: 100vh;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar-logo {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 700;
+            padding: 0 12px 24px;
+            border-bottom: 1px solid var(--gray-200);
+            margin-bottom: 24px;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-section-title {
+            color: var(--sidebar-text);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+            margin-bottom: 4px;
+        }
+
+        .nav-item:hover {
+            background: var(--sidebar-bg-hover);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--sidebar-bg-active);
+            color: var(--sidebar-text-active);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-footer {
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .user-info:hover {
+            background: var(--sidebar-bg-hover);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-name {
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .user-role {
+            color: var(--sidebar-text);
+            font-size: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 264px;
+            padding: 24px 32px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .header-title h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .header-title p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .theme-toggle {
+            display: flex;
+            background: var(--gray-200);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .theme-btn {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .theme-btn.active {
+            background: white;
+            color: var(--text-primary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            background: var(--primary-600);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-700);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .stat-icon.blue { background: #DCFCE7; color: #16A34A; }
+        .stat-icon.green { background: #FEE2E2; color: #DC2626; }
+        .stat-icon.yellow { background: #E5E7EB; color: #6B7280; }
+        .stat-icon.purple { background: #DCFCE7; color: #16A34A; }
+
+        .stat-change {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .stat-change.positive {
+            background: #D1FAE5;
+            color: #059669;
+        }
+
+        .stat-change.negative {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-action {
+            color: var(--primary-500);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .card-action:hover {
+            text-decoration: underline;
+        }
+
+        /* Chart Placeholder */
+        .chart-placeholder {
+            height: 300px;
+            background: var(--gray-50);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Recent List */
+        .recent-list {
+            list-style: none;
+        }
+
+        .recent-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .recent-item:last-child {
+            border-bottom: none;
+        }
+
+        .recent-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .recent-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gray-100);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .recent-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .recent-date {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .recent-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">Diem Hoa Von</div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">Menu chinh</div>
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">📁</span>
+                    <span>Dinh phi</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">📈</span>
+                    <span>Bien phi</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">📦</span>
+                    <span>San pham</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">🧮</span>
+                    <span>Tinh toan</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Bao cao</div>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span>Lich su</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">📧</span>
+                    <span>Email</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">He thong</div>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span>Nguoi dung</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Cai dat</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">NT</div>
+                <div class="user-details">
+                    <div class="user-name">Nguyen Van A</div>
+                    <div class="user-role">Admin</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="header">
+            <div class="header-title">
+                <h1>Dashboard</h1>
+                <p>Tong quan ve tinh hinh kinh doanh</p>
+            </div>
+            <div class="header-actions">
+                <div class="theme-toggle">
+                    <button class="theme-btn active">Sang</button>
+                    <button class="theme-btn">Toi</button>
+                </div>
+                <button class="btn-primary">
+                    <span>+</span>
+                    <span>Tinh toan moi</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon blue">💰</div>
+                    <span class="stat-change positive">+12%</span>
+                </div>
+                <div class="stat-value">125,000,000</div>
+                <div class="stat-label">Tong dinh phi (VND)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon green">📊</div>
+                    <span class="stat-change positive">+8%</span>
+                </div>
+                <div class="stat-value">45,000</div>
+                <div class="stat-label">Bien phi TB/don (VND)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon yellow">📦</div>
+                    <span class="stat-change negative">-2%</span>
+                </div>
+                <div class="stat-value">12</div>
+                <div class="stat-label">So san pham</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon purple">🎯</div>
+                    <span class="stat-change positive">+5%</span>
+                </div>
+                <div class="stat-value">2,500</div>
+                <div class="stat-label">Diem hoa von (don)</div>
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Bieu do diem hoa von</h3>
+                    <a href="#" class="card-action">Xem chi tiet</a>
+                </div>
+                <div class="chart-placeholder">
+                    [Bieu do duong - Doanh thu vs Chi phi]
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Tinh toan gan day</h3>
+                    <a href="#" class="card-action">Xem tat ca</a>
+                </div>
+                <ul class="recent-list">
+                    <li class="recent-item">
+                        <div class="recent-info">
+                            <div class="recent-icon">📊</div>
+                            <div>
+                                <div class="recent-title">Thang 01/2026</div>
+                                <div class="recent-date">14/01/2026</div>
+                            </div>
+                        </div>
+                        <div class="recent-value">2,500 don</div>
+                    </li>
+                    <li class="recent-item">
+                        <div class="recent-info">
+                            <div class="recent-icon">📊</div>
+                            <div>
+                                <div class="recent-title">Thang 12/2025</div>
+                                <div class="recent-date">01/12/2025</div>
+                            </div>
+                        </div>
+                        <div class="recent-value">2,380 don</div>
+                    </li>
+                    <li class="recent-item">
+                        <div class="recent-info">
+                            <div class="recent-icon">📊</div>
+                            <div>
+                                <div class="recent-title">Thang 11/2025</div>
+                                <div class="recent-date">01/11/2025</div>
+                            </div>
+                        </div>
+                        <div class="recent-value">2,420 don</div>
+                    </li>
+                    <li class="recent-item">
+                        <div class="recent-info">
+                            <div class="recent-icon">📊</div>
+                            <div>
+                                <div class="recent-title">Thang 10/2025</div>
+                                <div class="recent-date">01/10/2025</div>
+                            </div>
+                        </div>
+                        <div class="recent-value">2,550 don</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

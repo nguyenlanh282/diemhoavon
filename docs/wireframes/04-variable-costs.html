@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Bien Phi | Diem Hoa Von</title>
+    <style>
+        :root {
+            --primary-500: #10B981;
+            --primary-600: #059669;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --bg-page: #F9FAFB;
+            --sidebar-bg: #FFFFFF;
+            --sidebar-bg-hover: #F3F4F6;
+            --sidebar-bg-active: #D1FAE5;
+            --sidebar-text: #374151;
+            --sidebar-text-active: #059669;
+            --text-primary: #111827;
+            --text-secondary: #6B7280;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-page);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 264px;
+            background: var(--sidebar-bg);
+            min-height: 100vh;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar-logo {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 700;
+            padding: 0 12px 24px;
+            border-bottom: 1px solid var(--gray-200);
+            margin-bottom: 24px;
+        }
+
+        .sidebar-nav { flex: 1; }
+        .nav-section { margin-bottom: 24px; }
+
+        .nav-section-title {
+            color: var(--sidebar-text);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+            margin-bottom: 4px;
+        }
+
+        .nav-item:hover { background: var(--sidebar-bg-hover); color: var(--text-primary); }
+        .nav-item.active { background: var(--sidebar-bg-active); color: var(--sidebar-text-active); }
+
+        .main-content {
+            flex: 1;
+            margin-left: 264px;
+            padding: 24px 32px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .header-title h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .header-title p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .header-actions { display: flex; gap: 12px; }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary { background: var(--primary-500); color: white; }
+        .btn-primary:hover { background: var(--primary-600); }
+        .btn-secondary { background: white; color: var(--text-primary); border: 1px solid var(--gray-300); }
+        .btn-secondary:hover { background: var(--gray-50); }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .stat-unit {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            width: 240px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .select-box {
+            padding: 8px 16px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        th {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: var(--gray-50);
+        }
+
+        td {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .type-badge.cogs { background: #FEE2E2; color: #DC2626; }
+        .type-badge.tax { background: #FEF3C7; color: #B45309; }
+        .type-badge.commission { background: #DBEAFE; color: #1D4ED8; }
+        .type-badge.packaging { background: #D1FAE5; color: #059669; }
+        .type-badge.shipping { background: #EDE9FE; color: #7C3AED; }
+
+        .calc-method {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            background: var(--gray-100);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover { background: var(--gray-200); }
+        .action-btn.edit:hover { background: #DBEAFE; }
+        .action-btn.delete:hover { background: #FEE2E2; }
+
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .pagination-info {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .pagination-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .page-btn {
+            padding: 8px 12px;
+            border: 1px solid var(--gray-200);
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .page-btn:hover { background: var(--gray-50); }
+        .page-btn.active { background: var(--primary-500); color: white; border-color: var(--primary-500); }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-logo">Diem Hoa Von</div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">Menu chinh</div>
+                <a href="#" class="nav-item"><span>📊</span> Dashboard</a>
+                <a href="#" class="nav-item"><span>📁</span> Dinh phi</a>
+                <a href="#" class="nav-item active"><span>📈</span> Bien phi</a>
+                <a href="#" class="nav-item"><span>📦</span> San pham</a>
+                <a href="#" class="nav-item"><span>🧮</span> Tinh toan</a>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <div class="header-title">
+                <h1>Quan ly Bien phi</h1>
+                <p>Quan ly cac chi phi bien doi theo san luong</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary">
+                    <span>📥</span> Xuat Excel
+                </button>
+                <button class="btn btn-primary">
+                    <span>+</span> Them bien phi
+                </button>
+            </div>
+        </header>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-label">Tong loai bien phi</div>
+                <div class="stat-value">6 <span class="stat-unit">loai</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Bien phi TB/don</div>
+                <div class="stat-value">45,000 <span class="stat-unit">VND</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Ti le bien phi/gia</div>
+                <div class="stat-value">30 <span class="stat-unit">%</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Contribution Margin</div>
+                <div class="stat-value">105,000 <span class="stat-unit">VND</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Danh sach bien phi</h3>
+                <div class="filter-group">
+                    <select class="select-box">
+                        <option>Tat ca loai</option>
+                        <option>Gia von</option>
+                        <option>Thue</option>
+                        <option>Hoa hong</option>
+                    </select>
+                    <div class="search-box">
+                        <span>🔍</span>
+                        <input type="text" placeholder="Tim kiem bien phi...">
+                    </div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ten chi phi</th>
+                        <th>Loai</th>
+                        <th>Cach tinh</th>
+                        <th>Gia tri</th>
+                        <th>Ghi chu</th>
+                        <th>Thao tac</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Gia von hang ban</td>
+                        <td><span class="type-badge cogs">Gia von</span></td>
+                        <td><span class="calc-method">📊 % Gia ban</span></td>
+                        <td>20%</td>
+                        <td>Ap dung cho tat ca san pham</td>
+                        <td class="actions">
+                            <button class="action-btn edit">✏️</button>
+                            <button class="action-btn delete">🗑️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Thue VAT</td>
+                        <td><span class="type-badge tax">Thue</span></td>
+                        <td><span class="calc-method">📊 % Gia ban</span></td>
+                        <td>10%</td>
+                        <td>Thue gia tri gia tang</td>
+                        <td class="actions">
+                            <button class="action-btn edit">✏️</button>
+                            <button class="action-btn delete">🗑️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Hoa hong ban hang</td>
+                        <td><span class="type-badge commission">Hoa hong</span></td>
+                        <td><span class="calc-method">📊 % Gia ban</span></td>
+                        <td>5%</td>
+                        <td>Hoa hong cho nhan vien</td>
+                        <td class="actions">
+                            <button class="action-btn edit">✏️</button>
+                            <button class="action-btn delete">🗑️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phi dong goi</td>
+                        <td><span class="type-badge packaging">Dong goi</span></td>
+                        <td><span class="calc-method">💰 Co dinh/don</span></td>
+                        <td>5,000 VND</td>
+                        <td>Bao bi, hop dung</td>
+                        <td class="actions">
+                            <button class="action-btn edit">✏️</button>
+                            <button class="action-btn delete">🗑️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phi van chuyen</td>
+                        <td><span class="type-badge shipping">Van chuyen</span></td>
+                        <td><span class="calc-method">💰 Co dinh/don</span></td>
+                        <td>15,000 VND</td>
+                        <td>Chi phi giao hang TB</td>
+                        <td class="actions">
+                            <button class="action-btn edit">✏️</button>
+                            <button class="action-btn delete">🗑️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phi thanh toan</td>
+                        <td><span class="type-badge tax">Thue</span></td>
+                        <td><span class="calc-method">📊 % Gia ban</span></td>
+                        <td>2%</td>
+                        <td>Phi cong thanh toan</td>
+                        <td class="actions">
+                            <button class="action-btn edit">✏️</button>
+                            <button class="action-btn delete">🗑️</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <div class="pagination-info">Hien thi 1-6 trong 6 muc</div>
+                <div class="pagination-buttons">
+                    <button class="page-btn">←</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">→</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
