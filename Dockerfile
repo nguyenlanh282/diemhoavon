@@ -32,6 +32,10 @@ RUN npx prisma generate
 # Set environment for build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
+# Placeholder URL so NextAuth can parse a valid URL at build time.
+# The real NEXTAUTH_URL is injected at runtime via Dokploy env vars.
+ENV NEXTAUTH_URL=http://localhost:3000
+ENV AUTH_SECRET=build-time-placeholder-secret-not-used-at-runtime
 
 # Build the application
 RUN npm run build
