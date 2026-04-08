@@ -16,6 +16,7 @@ import {
   TrendingDown,
   Package,
   PiggyBank,
+  FolderOpen,
   LogOut,
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
@@ -43,6 +44,7 @@ export function MobileNav({ locale, user }: MobileNavProps) {
     { href: '/costs/variable', icon: TrendingDown, label: t('variableCosts') },
     { href: '/investments', icon: PiggyBank, label: t('investments') },
     { href: '/products', icon: Package, label: t('products') },
+    { href: '/projects', icon: FolderOpen, label: locale === 'vi' ? 'Dự án' : 'Projects' },
   ]
 
   const isActive = (href: string) => {
@@ -83,6 +85,16 @@ export function MobileNav({ locale, user }: MobileNavProps) {
         >
           <Package className="h-5 w-5" />
           <span>{t('products')}</span>
+        </Link>
+        <Link
+          href="/projects"
+          className={cn(
+            'flex flex-col items-center p-2 text-xs',
+            isActive('/projects') ? 'text-primary' : 'text-muted-foreground'
+          )}
+        >
+          <FolderOpen className="h-5 w-5" />
+          <span>{locale === 'vi' ? 'Dự án' : 'Projects'}</span>
         </Link>
 
         {/* More menu */}
