@@ -63,6 +63,8 @@ ENV HOSTNAME="0.0.0.0"
 # Copy package files for production install
 COPY package.json package-lock.json* ./
 COPY prisma ./prisma/
+# Required by prisma migrate deploy to resolve DATABASE_URL at runtime
+COPY prisma.config.ts ./
 
 # Install production dependencies only
 RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
