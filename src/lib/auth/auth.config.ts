@@ -87,23 +87,28 @@ export const authConfig: NextAuthConfig = {
     async signIn({ user, account }) {
       // Handle Google OAuth: create user if not exists
       if (account?.provider === 'google' && user.email) {
-        const existing = await prisma.user.findUnique({
-          where: { email: user.email },
-        })
-        if (!existing) {
-          // Create new org and user for OAuth users
-          const org = await prisma.organization.create({
-            data: { name: `${user.name || 'User'}'s Organization` },
+        try {
+          const existing = await prisma.user.findUnique({
+            where: { email: user.email },
           })
-          await prisma.user.create({
-            data: {
-              email: user.email,
-              name: user.name,
-              image: user.image,
-              organizationId: org.id,
-              emailVerified: new Date(),
-            },
-          })
+          if (!existing) {
+            // Create new org and user for OAuth users
+            const org = await prisma.organization.create({
+              data: { name: `${user.name || 'User'}'s Organization` },
+            })
+            await prisma.user.create({
+              data: {
+                email: user.email,
+                name: user.name,
+                image: user.image,
+                organizationId: org.id,
+                emailVerified: new Date(),
+              },
+            })
+          }
+        } catch (error) {
+          console.error('[NextAuth] Google signIn DB error:', error)
+          return false
         }
       }
       return true
