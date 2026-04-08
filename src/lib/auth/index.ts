@@ -5,6 +5,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
   // Support both AUTH_SECRET (NextAuth v5) and NEXTAUTH_SECRET (legacy name)
   secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
+  // Required when deployed behind a reverse proxy (Dokploy/Traefik/nginx)
+  // Without this, NextAuth rejects requests whose Host header doesn't match AUTH_URL
+  trustHost: true,
 })
 
 // Export a lightweight auth check for middleware (without DB)
